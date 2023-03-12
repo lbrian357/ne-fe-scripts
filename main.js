@@ -33,9 +33,9 @@ var nhLib = {
       nhLib.quotePage.getAssetProfile(symbol, cg_id);
       nhLib.quotePage.initPriceTimeChart(symbol, cg_id);
     },
-    getAssetProfile: function (symbol, cg_id) {
+    getAssetProfile: function (symbol, cg_id = null) {
       $.ajax({
-        url: "https://api.nexthunch.io/api/v1/symbol_search?symbol=" + symbol,
+        url: "https://api.nexthunch.io/api/v1/symbol_search?symbol=" + symbol + (cg_id ? "&cg_id=" + cg_id : ""),
         success: function (res) {
           console.log("symbol profile: ", res);
 
@@ -80,7 +80,7 @@ var nhLib = {
         },
       });
     },
-    initPriceTimeChart: function (symbol, cg_id) {
+    initPriceTimeChart: function (symbol, cg_id = null) {
       const dep1 = nhLib.loadScript("https://code.highcharts.com/stock/highstock.js");
       const dep2 = nhLib.loadScript("https://code.highcharts.com/stock/modules/data.js");
       const dep3 = nhLib.loadScript("https://code.highcharts.com/stock/modules/exporting.js");
@@ -95,37 +95,37 @@ var nhLib = {
 
         function allTimePricePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=alltime",
+            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=alltime" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
         function monthlyPricePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=monthly",
+            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=monthly" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
         function dailyPricePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=daily",
+            url: "https://api.nexthunch.io/api/v1/stock_price_plot?ticker=" + symbol + "&duration=daily" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
         function allTimeVolumePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=alltime",
+            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=alltime" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
         function monthlyVolumePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=monthly",
+            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=monthly" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
         function dailyVolumePlotPointsAjax() {
           return $.ajax({
-            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=daily",
+            url: "https://api.nexthunch.io/api/v1/stock_volume_plot?ticker=" + symbol + "&duration=daily" + (cg_id ? "&cg_id=" + cg_id : ""),
           });
         }
 
